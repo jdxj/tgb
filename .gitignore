@@ -1,12 +1,22 @@
-# Binaries for programs and plugins
-*.exe
-*.exe~
-*.dll
-*.so
-*.dylib
+.buildpath
+.hgignore.swp
+.project
+.orig
+.swp
+.idea/
+.settings/
+.vscode/
+bin/
+**/.DS_Store
+gf
+main
+main.exe
+output/
+manifest/output/
+temp/
+temp.yaml
+bin
+**/config/config.yaml
 
-# Test binary, build with `go test -c`
-*.test
-
-# Output of the go coverage tool, specifically when used with LiteIDE
-*.out
+# lockgit
+manifest/config/**
