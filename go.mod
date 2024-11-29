@@ -1,6 +1,6 @@
 module github.com/jdxj/tgb
 
-go 1.18
+go 1.23.3
 
 require (
 	github.com/gogf/gf/v2 v2.7.1
