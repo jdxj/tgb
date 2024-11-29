@@ -1,11 +1,11 @@
 package main
 
 import (
-	_ "tgb/internal/packed"
+	_ "github.com/jdxj/tgb/internal/packed"
 
 	"github.com/gogf/gf/v2/os/gctx"
 
-	"tgb/internal/cmd"
+	"github.com/jdxj/tgb/internal/cmd"
 )
 
 func main() {

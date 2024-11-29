@@ -2,9 +2,11 @@ package cmd
 
 import (
 	"context"
+	"time"
 
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/os/gcmd"
+	"github.com/gogf/gf/v2/os/gtime"
 	tele "gopkg.in/telebot.v4"
 )
 
@@ -39,8 +41,8 @@ var Main = gcmd.Command{
 			return err
 		}
 
-		b.Handle("/hello", func(c tele.Context) error {
-			return c.Send("Hello!")
+		b.Handle("/date", func(c tele.Context) error {
+			return c.Send(gtime.Now().Layout(time.DateTime))
 		})
 
 		b.Start()

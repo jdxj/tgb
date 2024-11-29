@@ -1,4 +1,4 @@
-module tgb
+module github.com/jdxj/tgb
 
 go 1.18
 
