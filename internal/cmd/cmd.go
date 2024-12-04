@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/gogf/gf/v2/os/gcmd"
-	"github.com/jdxj/tgb/internal/controller"
+	"github.com/jdxj/tgb/internal/service"
 )
 
 var Main = gcmd.Command{
@@ -12,6 +12,6 @@ var Main = gcmd.Command{
 	Usage: "tgb",
 	Brief: "start tgb",
 	Func: func(ctx context.Context, parser *gcmd.Parser) (err error) {
-		return controller.Run(ctx)
+		return service.Bot().Start(ctx)
 	},
 }

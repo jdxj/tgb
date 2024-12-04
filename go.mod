@@ -4,6 +4,7 @@ go 1.23.3
 
 require (
 	github.com/gogf/gf/v2 v2.7.1
+	github.com/google/go-github/v67 v67.0.0
 	gopkg.in/telebot.v4 v4.0.0-beta.4
 )
 
@@ -14,6 +15,7 @@ require (
 	github.com/fsnotify/fsnotify v1.7.0 // indirect
 	github.com/go-logr/logr v1.2.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
+	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/gorilla/websocket v1.5.1 // indirect
 	github.com/grokify/html-strip-tags-go v0.1.0 // indirect
 	github.com/magiconair/properties v1.8.7 // indirect
