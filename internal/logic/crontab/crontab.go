@@ -4,7 +4,13 @@ import (
 	"context"
 
 	"github.com/gogf/gf/v2/os/gcron"
+
+	"github.com/jdxj/tgb/internal/service"
 )
+
+func init() {
+	service.RegisterCrontab(New())
+}
 
 func New() *sCrontab {
 	return new(sCrontab)
