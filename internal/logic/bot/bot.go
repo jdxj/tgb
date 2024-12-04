@@ -5,8 +5,10 @@ import (
 
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/os/gctx"
-	"github.com/jdxj/tgb/internal/service"
 	tele "gopkg.in/telebot.v4"
+
+	"github.com/jdxj/tgb/internal/service"
+	"github.com/jdxj/tgb/utility"
 )
 
 func init() {
@@ -37,7 +39,7 @@ func New() *sBot {
 }
 
 func (s *sBot) Start(ctx context.Context) error {
-	s.RegisterHandler(ctx)
+	s.registerHandler()
 	s.b.Start()
 	return nil
 }
@@ -47,7 +49,21 @@ func (s *sBot) Stop(ctx context.Context) error {
 	return nil
 }
 
-func (s *sBot) RegisterHandler(ctx context.Context) error {
-	s.b.Handle(hello(ctx))
-	return nil
+func (s *sBot) registerHandler() {
+	handlers := []handler{
+		helloHandler(),
+	}
+	for _, handler := range handlers {
+		s.b.Handle(handler.path, handler.f)
+	}
+}
+
+func (s *sBot) Send(ctx context.Context, content string) error {
+	id, err := utility.ParseCfgInt64(ctx, "tgb.owner")
+	if err != nil {
+		return err
+	}
+	user := &tele.User{ID: id}
+	_, err = s.b.Send(user, content)
+	return err
 }

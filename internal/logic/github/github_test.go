@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/gogf/gf/v2/os/gctx"
+	"github.com/jdxj/tgb/internal/model"
 )
 
 var (
@@ -12,7 +13,11 @@ var (
 )
 
 func TestLatestTag(t *testing.T) {
-	tag, _, err := s.LatestTag(ctx, "golang-design", "clipboard")
+	repo := &model.Repository{
+		Owner: "golang-design",
+		Name:  "clipboard",
+	}
+	tag, _, err := s.LatestTag(ctx, repo)
 	if err != nil {
 		t.Fatalf("%s\n", err)
 	}

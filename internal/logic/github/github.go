@@ -7,6 +7,7 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/os/gctx"
 	"github.com/google/go-github/v67/github"
+	"github.com/jdxj/tgb/internal/model"
 	"github.com/jdxj/tgb/internal/service"
 )
 
@@ -32,8 +33,8 @@ func repoId(owner, repo string) string {
 	return fmt.Sprintf("%s/%s", owner, repo)
 }
 
-func (s *sGithub) LatestTag(ctx context.Context, owner, repo string) (string, bool, error) {
-	tags, _, err := s.c.Repositories.ListTags(ctx, owner, repo, &github.ListOptions{Page: 1, PerPage: 1})
+func (s *sGithub) LatestTag(ctx context.Context, repo *model.Repository) (string, bool, error) {
+	tags, _, err := s.c.Repositories.ListTags(ctx, repo.Owner, repo.Name, &github.ListOptions{Page: 1, PerPage: 1})
 	if err != nil {
 		return "", false, err
 	}
@@ -43,10 +44,9 @@ func (s *sGithub) LatestTag(ctx context.Context, owner, repo string) (string, bo
 
 	var (
 		latestTag = tags[0].GetName()
-		rid       = repoId(owner, repo)
-		preTag    = s.tags[rid]
+		preTag    = s.tags[repo.Id()]
 	)
-	s.tags[rid] = latestTag
+	s.tags[repo.Id()] = latestTag
 	if preTag == "" || preTag == latestTag {
 		return latestTag, false, nil
 	}

@@ -7,11 +7,13 @@ package service
 
 import (
 	"context"
+
+	"github.com/jdxj/tgb/internal/model"
 )
 
 type (
 	IGithub interface {
-		LatestTag(ctx context.Context, owner string, repo string) (string, bool, error)
+		LatestTag(ctx context.Context, repo *model.Repository) (string, bool, error)
 	}
 )
 
