@@ -4,9 +4,24 @@ import (
 	"context"
 
 	"github.com/gogf/gf/v2/frame/g"
+	"github.com/gogf/gf/v2/os/gcron"
 
 	"github.com/jdxj/tgb/internal/service"
 )
+
+func (s *sCrontab) registerJob(ctx context.Context) error {
+	jobs := []job{
+		hasNewTagJob(),
+		yesterdayTrafficJob(),
+	}
+	for _, job := range jobs {
+		_, err := gcron.AddSingleton(ctx, job.pattern, job.f, job.name)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}
 
 func hasNewTagJob() job {
 	return job{

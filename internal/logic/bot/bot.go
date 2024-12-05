@@ -39,7 +39,7 @@ func New() *sBot {
 }
 
 func (s *sBot) Start(ctx context.Context) error {
-	s.registerHandler()
+	s.registerHandler(ctx)
 	s.b.Start()
 	return nil
 }
@@ -47,15 +47,6 @@ func (s *sBot) Start(ctx context.Context) error {
 func (s *sBot) Stop(ctx context.Context) error {
 	s.b.Stop()
 	return nil
-}
-
-func (s *sBot) registerHandler() {
-	handlers := []handler{
-		helloHandler(),
-	}
-	for _, handler := range handlers {
-		s.b.Handle(handler.path, handler.f)
-	}
 }
 
 func (s *sBot) Send(ctx context.Context, content string) error {

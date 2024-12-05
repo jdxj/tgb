@@ -26,17 +26,7 @@ func New() *sCrontab {
 type sCrontab struct{}
 
 func (s *sCrontab) Start(ctx context.Context) error {
-	jobs := []job{
-		hasNewTagJob(),
-		yesterdayTrafficJob(),
-	}
-	for _, job := range jobs {
-		_, err := gcron.AddSingleton(ctx, job.pattern, job.f, job.name)
-		if err != nil {
-			return err
-		}
-	}
-	return nil
+	return s.registerJob(ctx)
 }
 
 func (s *sCrontab) Stop(ctx context.Context) error {
