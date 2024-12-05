@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/os/gctx"
@@ -29,10 +30,10 @@ type sKiwi struct {
 	c *kiwi.Client
 }
 
-func (s *sKiwi) YesterdayTraffic(ctx context.Context) (int64, error) {
+func (s *sKiwi) YesterdayTraffic(ctx context.Context) error {
 	stats, err := s.c.GetRawUsageStats(ctx)
 	if err != nil {
-		return 0, err
+		return err
 	}
 
 	var (
@@ -40,5 +41,7 @@ func (s *sKiwi) YesterdayTraffic(ctx context.Context) (int64, error) {
 		beginUnix = yesterday.StartOfDay().Unix()
 		endUnix   = yesterday.EndOfDay().Unix()
 	)
-	return stats.Traffic(beginUnix, endUnix), nil
+	yesterdayTraffic := stats.Traffic(beginUnix, endUnix)
+	content := fmt.Sprintf("kiwi yesterday traffic: %.3fGB", float64(yesterdayTraffic)/1000/1000/1000)
+	return service.Bot().Send(ctx, content)
 }

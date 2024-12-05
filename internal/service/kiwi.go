@@ -11,7 +11,7 @@ import (
 
 type (
 	IKiwi interface {
-		YesterdayTraffic(ctx context.Context) (int64, error)
+		YesterdayTraffic(ctx context.Context) error
 	}
 )
 

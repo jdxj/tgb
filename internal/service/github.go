@@ -14,6 +14,7 @@ import (
 type (
 	IGithub interface {
 		LatestTag(ctx context.Context, repo *model.Repository) (string, bool, error)
+		HasNewTag(ctx context.Context) error
 	}
 )
 
