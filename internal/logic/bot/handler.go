@@ -16,7 +16,7 @@ func helloHandler() handler {
 		path: "/hello",
 		f: func(c tele.Context) error {
 			sender := c.Sender()
-			content := fmt.Sprintf("Hello %s!", sender.Username)
+			content := fmt.Sprintf("Hello %s%s!", sender.FirstName, sender.LastName)
 			return c.Send(content)
 		},
 	}

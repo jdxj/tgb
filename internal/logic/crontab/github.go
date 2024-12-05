@@ -5,17 +5,11 @@ import (
 	"fmt"
 
 	"github.com/gogf/gf/v2/frame/g"
-	"github.com/gogf/gf/v2/os/gtimer"
+
 	"github.com/jdxj/tgb/internal/model"
 	"github.com/jdxj/tgb/internal/service"
 	"github.com/jdxj/tgb/utility"
 )
-
-type job struct {
-	name    string
-	pattern string
-	f       gtimer.JobFunc
-}
 
 func hasNewTagJob() job {
 	return job{

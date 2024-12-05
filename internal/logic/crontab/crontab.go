@@ -4,12 +4,19 @@ import (
 	"context"
 
 	"github.com/gogf/gf/v2/os/gcron"
+	"github.com/gogf/gf/v2/os/gtimer"
 
 	"github.com/jdxj/tgb/internal/service"
 )
 
 func init() {
 	service.RegisterCrontab(New())
+}
+
+type job struct {
+	name    string
+	pattern string
+	f       gtimer.JobFunc
 }
 
 func New() *sCrontab {
@@ -21,6 +28,7 @@ type sCrontab struct{}
 func (s *sCrontab) Start(ctx context.Context) error {
 	jobs := []job{
 		hasNewTagJob(),
+		yesterdayTrafficJob(),
 	}
 	for _, job := range jobs {
 		_, err := gcron.AddSingleton(ctx, job.pattern, job.f, job.name)
