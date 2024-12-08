@@ -9,4 +9,5 @@ import (
 	_ "github.com/jdxj/tgb/internal/logic/crontab"
 	_ "github.com/jdxj/tgb/internal/logic/github"
 	_ "github.com/jdxj/tgb/internal/logic/kiwi"
+	_ "github.com/jdxj/tgb/internal/logic/sign_in"
 )

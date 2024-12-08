@@ -13,6 +13,7 @@ func (s *sCrontab) registerJob(ctx context.Context) error {
 	jobs := []job{
 		hasNewTagJob(),
 		yesterdayTrafficJob(),
+		signInJob(),
 	}
 	for _, job := range jobs {
 		_, err := gcron.AddSingleton(ctx, job.pattern, job.f, job.name)
@@ -44,6 +45,19 @@ func yesterdayTrafficJob() job {
 			err := service.Kiwi().YesterdayTraffic(ctx)
 			if err != nil {
 				g.Log().Errorf(ctx, "YesterdayTraffic err: %s", err)
+			}
+		},
+	}
+}
+
+func signInJob() job {
+	return job{
+		name:    "SignIn",
+		pattern: "0 0 11 * * *",
+		f: func(ctx context.Context) {
+			err := service.SignIn().SignIn(ctx)
+			if err != nil {
+				g.Log().Errorf(ctx, "SignIn err: %s", err)
 			}
 		},
 	}
