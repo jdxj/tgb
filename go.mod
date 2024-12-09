@@ -3,10 +3,11 @@ module github.com/jdxj/tgb
 go 1.23.3
 
 require (
+	github.com/avast/retry-go/v4 v4.6.0
 	github.com/go-resty/resty/v2 v2.16.2
 	github.com/gogf/gf/v2 v2.8.1
 	github.com/google/go-github/v67 v67.0.0
-	github.com/jdxj/kiwivm-api-go v0.1.2-0.20241205052210-254be57073c4
+	github.com/jdxj/kiwivm-api-go v0.2.0
 	gopkg.in/telebot.v4 v4.0.0-beta.4
 )
 

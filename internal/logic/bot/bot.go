@@ -2,7 +2,9 @@ package bot
 
 import (
 	"context"
+	"time"
 
+	"github.com/avast/retry-go/v4"
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/os/gctx"
 	tele "gopkg.in/telebot.v4"
@@ -54,7 +56,11 @@ func (s *sBot) Send(ctx context.Context, content string) error {
 	if err != nil {
 		return err
 	}
+
 	user := &tele.User{ID: id}
-	_, err = s.b.Send(user, content)
-	return err
+	f := func() error {
+		_, err := s.b.Send(user, content)
+		return err
+	}
+	return retry.Do(f, retry.Context(ctx), retry.Delay(time.Second))
 }
